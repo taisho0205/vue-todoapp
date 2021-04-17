@@ -14,13 +14,15 @@
   </div>
   <!-- 追加機能 -->
   <div class="add-todo-form">
-    <input v-model="todo.title" placeholder="Todoを入力"/>
+    <input v-model="todo.title" 
+    
+    placeholder="Todoを入力"/>
     <vuejs-datepicker v-model="todo.date" placeholder="期日を入力"></vuejs-datepicker> 
     <button type="button" @click="addTodo">追加</button>
   </div>
     <!--リスト表示 -->
     <div class="wrapper">
-      <div v-for="todo in todos"
+      <div v-for="(todo,index) in todos"
            :key="todo.id"
            class="container">
            <div class="todo-id">
@@ -32,6 +34,7 @@
            <div class="todo-date">
              Date: {{ todo.date }}
           </div>
+          <button @click="deleteTodo(todo.id)" type="button">削除</button>
       </div>
     </div>
 </main>
@@ -63,8 +66,11 @@
        this.todo.title = ''
        this.todo.date = ''
      },
+     deleteTodo(targetTodoIndex) {
+       this.todos = this.todos.filter(todo => todo.id !== targetTodoId)
+     },
   },
 });
-    </script>
+</script>
 </body>
 </html>
