@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Todoアプリ</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -17,7 +18,10 @@
     <input v-model="todo.title" 
     
     placeholder="Todoを入力"/>
-    <vuejs-datepicker v-model="todo.date" placeholder="期日を入力"></vuejs-datepicker> 
+    <vuejs-datepicker
+    class="date"
+    name="datepicker"
+    :format="DatePickerFormat"placeholder="期日を入力"></vuejs-datepicker> 
     <button type="button" @click="addTodo">追加</button>
   </div>
     <!--リスト表示 -->
@@ -49,8 +53,9 @@
       todo: {
         id: 0,
         title:'',
-        date:''
+        date:'',
       },
+      DatePickerFormat: 'yyyy-MM-dd'
     },
     components: {
       'vuejs-datepicker': vuejsDatepicker
@@ -66,7 +71,7 @@
        this.todo.title = ''
        this.todo.date = ''
      },
-     deleteTodo(targetTodoIndex) {
+     deleteTodo(targetTodoId) {
        this.todos = this.todos.filter(todo => todo.id !== targetTodoId)
      },
   },
