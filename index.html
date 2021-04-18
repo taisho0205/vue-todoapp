@@ -20,7 +20,6 @@
     placeholder="Todoを入力"/>
     <vuejs-datepicker
     class="date"
-    name="datepicker"
     :format="DatePickerFormat"placeholder="期日を入力"></vuejs-datepicker> 
     <button type="button" @click="addTodo">追加</button>
   </div>
@@ -55,19 +54,19 @@
         title:'',
         date:'',
       },
-      DatePickerFormat: 'yyyy-MM-dd'
     },
     components: {
-      'vuejs-datepicker': vuejsDatepicker
+      'vuejs-datepicker': vuejsDatepicker,
+      DatePickerFormat: 'yyyy-MM-dd'
     },
     methods: {
-     addTodo(){
-       this.todos.push({
-         id: this.todo.id,
-         title:this.todo.title,
-         date:this.todo.date
-       })
-       this.todo.id++
+      addTodo(){
+        this.todos.push({
+          id: this.todo.id,
+          title:this.todo.title,
+          date:this.todo.date
+        })
+        this.todo.id++
        this.todo.title = ''
        this.todo.date = ''
      },
