@@ -20,11 +20,12 @@
     placeholder="Todoを入力"/>
     <vuejs-datepicker
     class="date"
-    :format="DatePickerFormat"placeholder="期日を入力"></vuejs-datepicker> 
+    v-model="todo.date"
+    :format="DatePickerFormat" ></vuejs-datepicker> 
     <button type="button" @click="addTodo">追加</button>
   </div>
     <!--リスト表示 -->
-    
+
     <div class="wrapper">
       <div v-for="(todo,index) in todos"
            :key="todo.id"
@@ -45,6 +46,7 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js">
 </script>
 <script src="https://unpkg.com/vuejs-datepicker"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" defer></script>
 <script>
   const app = new Vue ({
     el: '#app',
@@ -55,13 +57,16 @@
         title:'',
         date:'',
       },
+      DatePickerFormat: 'yyyy-MM-dd'
     },
     components: {
       'vuejs-datepicker': vuejsDatepicker,
-      DatePickerFormat: 'yyyy-MM-dd'
     },
     methods: {
       addTodo(){
+        console.log(this.todo.date)
+        this.todo.date = moment(this.todo.date).format('YYYY/MM/DD');
+        console.log(this.todo.date)
         this.todos.push({
           id: this.todo.id,
           title:this.todo.title,
