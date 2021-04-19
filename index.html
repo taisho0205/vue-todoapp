@@ -23,6 +23,7 @@
     v-model="todo.date"
     :format="DatePickerFormat" placeholder="期日を入力"></vuejs-datepicker> 
     <button type="button" @click="addTodo">追加</button>
+    <div> {{ todo.title.length }} / 20 </div>
   </div>
     <!--リスト表示 -->
 
@@ -34,7 +35,7 @@
              ID:{{ todo.id }}
            </div>
            <div class="todo-title">
-             Title: {{ todo.title }}
+             Title: {{ todo.title }} 
            </div>
            <div class="todo-date">
              Date: {{ todo.date }}
@@ -64,13 +65,14 @@
     },
     methods: {
       addTodo(){
-        console.log(this.todo.date)
+        if (this.todo.title.length === 0) return
+        if (this.todo.title.length >= 21) return
         this.todo.date = moment(this.todo.date).format('YYYY/MM/DD');
-        console.log(this.todo.date)
+        console.log(this.todo.date),
         this.todos.push({
           id: this.todo.id,
           title:this.todo.title,
-          date:this.todo.date
+          date:this.todo.date,
         })
         this.todo.id++
        this.todo.title = ''
